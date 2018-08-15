@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>Test</title> 
+</head>
+<body>
+
+<p>Name: Kobe, James, Westbrook, Durant, Yao, Wade</p>
+<p>Divided into 2 groups</p>
+<button onclick="myFunction()">click</button>
+<p id="demo"></p>
+<script>
+function myFunction(){
+	var members = new Array("Kobe", "James", "Westbrook", "Durant", "Yao", "Wade");
+	var groupNum = 2;
+	var membersNum = members.length;
+    var membersRandom = new Array();
+	var grpMemberNum = membersNum / groupNum;
+	
+	document.getElementById("demo").innerHTML = grpMemberNum;
+	//bubbleSort();
+	//assignedGroup();
+}
+</script>
+
+<script>
+function bubbleSort(arr, arrString) {
+	var temp;
+	var temps;
+	for (int i = 0; i < arr.length - 1; i++) {
+		for (int j = arr.length - 1; j > i; j--) {
+			if (arr[j] < arr[j - 1]) {
+				temp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = temp;
+
+				temps = arrString[j];
+				arrString[j] = arrString[j - 1];
+				arrString[j - 1] = temps;
+			}
+		}
+	}
+	return arrString;
+}
+
+function assignedGroup(members, grpMemberNum, groupNum) {
+	var i, j;
+	var x = "";
+	for (i = 1; i <= groupNum; i++) {
+		x = "Group" + i + ": ";
+		for (j = grpMemberNum * (i-1); j < grpMemberNum * i; j++){
+			x = x + members[j] + ", ";
+		}
+		document.getElementById("demo").innerHTML = x ;
+	}
+}
+</script>
+
+</body>
+</html>
