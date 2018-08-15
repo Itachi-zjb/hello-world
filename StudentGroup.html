@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312"> 
+<title>五（1）班分组</title> 
+</head>
+
+<body style="background-image:url(bg.jpg);background-size:1400px 680px;">
+
+<h1 id="Parents">
+	<b>五（1）班的21位学生，将会被随机分成9人和12人的两个小组</b>
+	<button onclick="startUp()" style ="width:100px; height:50px;">点击开始</button>
+	<button onclick="stop()" style ="width:100px; height:50px;">点击结束</button>
+</h1>
+<br/>
+<p id="demo"><b><font size=7>毕雯逸, 王熠, 石一帆, 陈伟玄, 陈伟弘, 刘明洲, 郑睿阳, 方伽幼, 宋子天, 李杭珈, 
+				林晗玥, 邬天悦, 陈易新, 蔡瑾瑜, 朱泽霖, 张钰涵, 郑琅, 黄胡斌, 洪家琰, 何熠忆, 范馨文</font></b></p>
+
+<script type="text/javascript" charset="UTF-8">
+var t, startFlag = 0;
+function startUp(){
+	if(startFlag == 0){
+		startFlag = 1;
+		t = window.setInterval("myFunction()",130);
+	}
+}
+
+function stop(){
+	if(startFlag == 1){
+		startFlag = 0;
+		window.clearInterval(t); 
+	}
+}
+
+function myFunction(){
+	var members = new Array("毕雯逸","王熠","石一帆","陈伟玄","陈伟弘","刘明洲","郑睿阳","方伽幼","宋子天","李杭珈",
+	                        "林晗玥","邬天悦","陈易新","蔡瑾瑜","朱泽霖","张钰涵","郑琅","黄胡斌","洪家琰","何熠忆","范馨文");
+	var membersNum = members.length;
+    var membersRandom = new Array();
+	var i, output;
+	
+	for (i = 0; i < membersNum; i++) {
+		membersRandom[i] = Math.random() * 10000;
+	}
+	
+	members = bubbleSort(membersRandom, members);
+	//window.alert(members);
+	output = assignedGroup(members);
+	//window.alert(output);
+	document.getElementById("demo").innerHTML = output;
+}
+
+function bubbleSort(arr, arrString) {
+	var temp, temps, i, j;
+	for (i = 0; i < arr.length - 1; i++) {
+		for (j = arr.length - 1; j > i; j--) {
+			if (arr[j] < arr[j - 1]) {
+				temp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = temp;
+
+				temps = arrString[j];
+				arrString[j] = arrString[j - 1];
+				arrString[j - 1] = temps;
+			}
+		}
+	}
+	return arrString;
+}
+
+function assignedGroup(members) {
+	var i, j;
+	var output = "";
+	for (i = 0; i < 21; i++) {
+		if(i == 0) {
+			output= "<b><font size=7>第一组（9人）：" + members[i];
+		}else if(i == 9){
+			output= output + "<br/>第二组（12人）：" + members[i];
+		}else{
+			output = output + ", " +members[i];
+		}
+	}
+	output = output + "</font></b>";
+	return output;
+}
+</script>
+
+</body>
+</html>

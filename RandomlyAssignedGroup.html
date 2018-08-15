@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head> 
-<meta charset="utf-8"> 
-<title>Test</title> 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GB2312">
+    <title>Test</title>
 </head>
 <body>
 
-<p>Name: Kobe, James, Westbrook, Durant, Yao, Wade</p>
+<p id="Parents">Name: </p>
 <p>Divided into 2 groups</p>
 <button onclick="myFunction()">click</button>
 <p id="demo"></p>
-<script>
+
+<script type="text/javascript" charset="UTF-8">
 function myFunction(){
-	var members = new Array("Kobe", "James", "Westbrook", "Durant", "Yao", "Wade");
+	var members = new Array("毕雯逸","王熠","石一帆","陈伟玄","陈伟弘","刘明洲","郑睿阳","方伽幼","宋子天","李杭珈",
+	                        "林晗玥","邬天悦","陈易新","蔡瑾瑜","朱泽霖","张钰涵","郑琅","黄胡斌","洪家琰","何熠忆","范馨文");
 	var groupNum = 2;
 	var membersNum = members.length;
+	if (membersNum % groupNum != 0){
+		window.alert("无法平均分组，请核对人数后重新分组！");
+		return;
+	}
     var membersRandom = new Array();
-	var grpMemberNum = membersNum / groupNum;
-	
-	document.getElementById("demo").innerHTML = grpMemberNum;
-	//bubbleSort();
-	//assignedGroup();
-}
-</script>
+	var grpMemberNum = Math.floor(membersNum / groupNum);
+	var i, output;
 
-<script>
+	for (i = 0; i < membersNum; i++) {
+		membersRandom[i] = Math.random() * 10000;
+	}
+
+	members = bubbleSort(membersRandom, members);
+	//window.alert(members);
+	output = assignedGroup(members, grpMemberNum, groupNum);
+	//window.alert(output);
+	document.getElementById("demo").innerHTML = output;
+}
+
 function bubbleSort(arr, arrString) {
-	var temp;
-	var temps;
-	for (int i = 0; i < arr.length - 1; i++) {
-		for (int j = arr.length - 1; j > i; j--) {
+	var temp, temps, i, j;
+	for (i = 0; i < arr.length - 1; i++) {
+		for (j = arr.length - 1; j > i; j--) {
 			if (arr[j] < arr[j - 1]) {
 				temp = arr[j];
 				arr[j] = arr[j - 1];
@@ -48,12 +58,17 @@ function assignedGroup(members, grpMemberNum, groupNum) {
 	var i, j;
 	var x = "";
 	for (i = 1; i <= groupNum; i++) {
-		x = "Group" + i + ": ";
+		x = x + "Group" + i + ": ";
 		for (j = grpMemberNum * (i-1); j < grpMemberNum * i; j++){
-			x = x + members[j] + ", ";
+			if(j == grpMemberNum * (i-1)){
+				x = x + members[j];
+			}else{
+				x = x + ", " + members[j];
+			}
 		}
-		document.getElementById("demo").innerHTML = x ;
+		x = x + "<br/>";
 	}
+	return x;
 }
 </script>
 
