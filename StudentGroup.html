@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=GB2312"> 
-<title>五（1）班分组</title> 
+<title>四（1）班分组</title> 
 </head>
 
 <body style="background-image:url(bg.jpg);background-size:1400px 680px;">
 
 <h1 id="Parents">
-	<b>五（1）班的21位学生，将会被随机分成9人和12人的两个小组</b>
-	<button onclick="startUp()" style ="width:100px; height:50px;">点击开始</button>
-	<button onclick="stop()" style ="width:100px; height:50px;">点击结束</button>
+	<b>四（1）班的21位学生，将会被随机分成12人和9人的两个小组</b>
+	<button id = "start_btn" onclick="startUp()" style ="width:100px; height:50px; display:block">点击开始</button>
+	<button id = "stop_btn" onclick="stop()" style ="width:100px; height:50px; display:none">点击结束</button>
 </h1>
 <br/>
 <p id="demo"><b><font size=7>毕雯逸, 王熠, 石一帆, 陈伟玄, 陈伟弘, 刘明洲, 郑睿阳, 方伽幼, 宋子天, 李杭珈, 
@@ -22,6 +22,8 @@ function startUp(){
 	if(startFlag == 0){
 		startFlag = 1;
 		t = window.setInterval("myFunction()",130);
+		document.getElementById("start_btn").style.display = "none";
+		document.getElementById("stop_btn").style.display = "block";
 	}
 }
 
@@ -29,6 +31,8 @@ function stop(){
 	if(startFlag == 1){
 		startFlag = 0;
 		window.clearInterval(t); 
+		document.getElementById("stop_btn").style.display = "none";
+		document.getElementById("start_btn").style.display = "block";
 	}
 }
 
@@ -73,9 +77,9 @@ function assignedGroup(members) {
 	var output = "";
 	for (i = 0; i < 21; i++) {
 		if(i == 0) {
-			output= "<b><font size=7>第一组（9人）：" + members[i];
-		}else if(i == 9){
-			output= output + "<br/>第二组（12人）：" + members[i];
+			output= "<b><font size=7>第一组（12人）：" + members[i];
+		}else if(i == 12){
+			output= output + "<br/>第二组（9人）：" + members[i];
 		}else{
 			output = output + ", " +members[i];
 		}
